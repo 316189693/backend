@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-     <bean id="animal" class="com.htjy.ioc.Cat" autowire="byType" >
+     <bean id="animal" class="com.htjy.ioc.Cat" autowire="byType" lazy-init="true">
         <property name="friend" ref="animal0"/>
      </bean>
     <bean id="animal0" class="com.htjy.ioc.Dog"></bean>
