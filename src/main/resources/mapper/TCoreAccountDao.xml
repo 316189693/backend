@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htjy.dao.TCoreAccountDao">
+  <resultMap id="BaseResultMap" type="com.htjy.entity.TCoreAccount">
+    <id column="t_core_account_id" jdbcType="BIGINT" property="id" />
+    <result column="t_core_account_created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="t_core_account_updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="t_core_account_username" jdbcType="VARCHAR" property="username" />
+    <result column="t_core_account_password" jdbcType="VARCHAR" property="password" />
+    <result column="t_core_account_realname" jdbcType="VARCHAR" property="realname" />
+    <result column="t_core_account_email" jdbcType="VARCHAR" property="email" />
+    <result column="t_core_account_tel" jdbcType="VARCHAR" property="tel" />
+    <result column="t_core_account_head_img_id" jdbcType="BIGINT" property="headImgId" />
+    <result column="t_core_account_head_img_thumb_id" jdbcType="BIGINT" property="headImgThumbId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_core_account.id as t_core_account_id, t_core_account.created_time as t_core_account_created_time, 
+    t_core_account.updated_time as t_core_account_updated_time, t_core_account.username as t_core_account_username, 
+    t_core_account.`password` as `t_core_account_password`, t_core_account.realname as t_core_account_realname, 
+    t_core_account.email as t_core_account_email, t_core_account.tel as t_core_account_tel, 
+    t_core_account.head_img_id as t_core_account_head_img_id, t_core_account.head_img_thumb_id as t_core_account_head_img_thumb_id
+  </sql>
+  <select id="selectByExample" parameterType="com.htjy.entity.TCoreAccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_core_account t_core_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+    <if test="forUpdate != null and forUpdate == true">
+      for update
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_core_account t_core_account
+    where t_core_account.id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_core_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.htjy.entity.TCoreAccountExample">
+    delete from t_core_account t_core_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.htjy.entity.TCoreAccount" useGeneratedKeys="true">
+    insert into t_core_account (created_time, updated_time, username, 
+      `password`, realname, email, 
+      tel, head_img_id, head_img_thumb_id
+      )
+    values (#{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{headImgId,jdbcType=BIGINT}, #{headImgThumbId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.htjy.entity.TCoreAccount" useGeneratedKeys="true">
+    insert into t_core_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="headImgId != null">
+        head_img_id,
+      </if>
+      <if test="headImgThumbId != null">
+        head_img_thumb_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="headImgId != null">
+        #{headImgId,jdbcType=BIGINT},
+      </if>
+      <if test="headImgThumbId != null">
+        #{headImgThumbId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.htjy.entity.TCoreAccountExample" resultType="java.lang.Long">
+    select count(*) from t_core_account t_core_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_core_account t_core_account
+    <set>
+      <if test="record.id != null">
+        t_core_account.id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdTime != null">
+        t_core_account.created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null">
+        t_core_account.updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.username != null">
+        t_core_account.username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        t_core_account.`password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null">
+        t_core_account.realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        t_core_account.email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        t_core_account.tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImgId != null">
+        t_core_account.head_img_id = #{record.headImgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.headImgThumbId != null">
+        t_core_account.head_img_thumb_id = #{record.headImgThumbId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_core_account t_core_account
+    set t_core_account.id = #{record.id,jdbcType=BIGINT},
+      t_core_account.created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      t_core_account.updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      t_core_account.username = #{record.username,jdbcType=VARCHAR},
+      t_core_account.`password` = #{record.password,jdbcType=VARCHAR},
+      t_core_account.realname = #{record.realname,jdbcType=VARCHAR},
+      t_core_account.email = #{record.email,jdbcType=VARCHAR},
+      t_core_account.tel = #{record.tel,jdbcType=VARCHAR},
+      t_core_account.head_img_id = #{record.headImgId,jdbcType=BIGINT},
+      t_core_account.head_img_thumb_id = #{record.headImgThumbId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.htjy.entity.TCoreAccount">
+    update t_core_account
+    <set>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="headImgId != null">
+        head_img_id = #{headImgId,jdbcType=BIGINT},
+      </if>
+      <if test="headImgThumbId != null">
+        head_img_thumb_id = #{headImgThumbId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.htjy.entity.TCoreAccount">
+    update t_core_account
+    set created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      head_img_id = #{headImgId,jdbcType=BIGINT},
+      head_img_thumb_id = #{headImgThumbId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

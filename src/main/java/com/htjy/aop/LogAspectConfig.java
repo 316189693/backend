@@ -20,7 +20,7 @@ public class LogAspectConfig {
 
     //被注解CustomAopAnnotation表示的方法
     //@Pointcut("@annotation(com.only.mate.springboot.annotation.CustomAopAnnotation")
-    @Pointcut("execution(public * com.htjy.controller.*.*(..))")
+    @Pointcut("execution(public * com.htjy.controller.UserController.*(..))")
     public void pointCut(){
 
     }
