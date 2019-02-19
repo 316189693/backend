@@ -25,4 +25,12 @@ public class Cat implements IAnimal {
     public void friendSkill() {
         this.friend.skill();
     }
+
+    public IAnimal getFriend() {
+        return friend;
+    }
+
+    public void setFriend(IAnimal friend) {
+        this.friend = friend;
+    }
 }
