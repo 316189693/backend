@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+     <bean id="animal" class="com.htjy.ioc.Cat" >
+         <constructor-arg name="friend" ref="animal0"></constructor-arg>
+     </bean>
+    <bean id="animal0" class="com.htjy.ioc.Dog"></bean>
+</beans>
