@@ -5,7 +5,7 @@ public class User {
     private int id;
     private int status;
     private int score;
-
+    @Student(value="zhangshan")
     public int getId() {
         return id;
     }
