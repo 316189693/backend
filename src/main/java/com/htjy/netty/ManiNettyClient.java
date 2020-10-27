@@ -26,10 +26,10 @@ public class ManiNettyClient {
         });
         clientThread.start();
 
-       Channel channel = null;
+        Channel channel = null;
         boolean isStart = false;
-        while (!isStart){
-            if (null != client.getChannel()){
+        while (!isStart) {
+            if (null != client.getChannel()) {
                 channel = client.getChannel();
                 isStart = true;
             }
@@ -38,8 +38,8 @@ public class ManiNettyClient {
         String helo = "hello, this is client.";
         ByteBuf byteBuf = Unpooled.wrappedBuffer(helo.getBytes());
         channel.writeAndFlush(byteBuf);
-        for (int i = 0; i < 10 ; i++) {
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()) {
             String text = scanner.nextLine();
             channel.writeAndFlush(Unpooled.wrappedBuffer(text.getBytes()));
         }
