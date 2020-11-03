@@ -21,7 +21,7 @@ public class CyclicBarrierTest implements Runnable{
                 System.out.println("start run....");
             }
         });
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 20; i++) {
             Thread t = new Thread(new CyclicBarrierTest(cyclicBarrier), String.valueOf(i));
             t.start();
         }
@@ -33,19 +33,16 @@ public class CyclicBarrierTest implements Runnable{
         System.out.println("Threa-"+Thread.currentThread().getName()+"-"+"start...");
         try {
             this.cyclicBarrier.await();
+            if (!"1".equals(Thread.currentThread().getName())){
+                Thread.sleep(2000);
+            }
+            System.out.println("Threa-"+Thread.currentThread().getName()+"-"+"end...");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
-        System.out.println("Threa-"+Thread.currentThread().getName()+"-"+"end...");
-        try {
-            this.cyclicBarrier.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (BrokenBarrierException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Threa-"+Thread.currentThread().getName()+"-"+"end-2...");
+
+
     }
 }
