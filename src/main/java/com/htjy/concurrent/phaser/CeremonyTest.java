@@ -30,21 +30,31 @@ public class CeremonyTest {
             phaser.arriveAndAwaitAdvance();
         }
         public void leave() {
-            System.out.printf("%s leave\n", this.name);
-            phaser.arriveAndAwaitAdvance();
+
+            if ("bride".equals(this.name) || "groom".equals(this.name)) {
+                phaser.arriveAndAwaitAdvance();
+            } else {
+                System.out.printf("%s leave\n", this.name);
+                phaser.arriveAndDeregister();
+            }
+
         }
         public void gotobed() {
             if ("bride".equals(this.name) || "groom".equals(this.name)) {
                 System.out.printf("%s got bed\n", this.name);
+                phaser.arriveAndAwaitAdvance();
             }
-            phaser.arriveAndAwaitAdvance();
+
+
+
         }
         @Override
         public void run() {
             arrived();
             eat();
-            gotobed();
             leave();
+            gotobed();
+
         }
     }
 }
@@ -64,11 +74,12 @@ class MarriagePhaser extends Phaser{
                 System.out.println("ceremony show... ");
                 return false; // this must be false so that whole waiting next barrier
             case 2:
-                System.out.println("go to bed");
-                return false; // this must be false so that whole waiting next barrier
-            case 3:
                 System.out.println("every body leave");
-                return true; // final return true
+                return false; // final return true
+            case 3:
+                System.out.println("go to bed");
+                return true; // this must be false so that whole waiting next barrier
+
 
             default:
                 System.out.println("finish");
