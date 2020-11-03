@@ -36,6 +36,7 @@ public class CeremonyTest {
             } else {
                 System.out.printf("%s leave\n", this.name);
                 phaser.arriveAndDeregister();
+
             }
 
         }
@@ -44,16 +45,24 @@ public class CeremonyTest {
                 System.out.printf("%s got bed\n", this.name);
                 phaser.arriveAndAwaitAdvance();
             }
+        }
 
-
+        public void countMony(){
+            if ("bride".equals(this.name) || "groom".equals(this.name)) {
+                System.out.printf("%s counting\n", this.name);
+                phaser.arriveAndAwaitAdvance();
+            }
 
         }
         @Override
         public void run() {
-            arrived();
-            eat();
-            leave();
-            gotobed();
+
+                arrived();
+                eat();
+                leave();
+                gotobed();
+                countMony();
+
 
         }
     }
