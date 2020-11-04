@@ -32,10 +32,15 @@ public class SemaphoreTest implements Runnable{
         System.out.println("Thread-"+ Thread.currentThread().getName() +"-start:");
         try {
             this.semaphore.acquire();
+            System.out.println("Thread-"+ Thread.currentThread().getName() +"get signal");
+            Thread.sleep(3000);
+            System.out.println("Thread-"+ Thread.currentThread().getName() +"-end:");
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+
+            this.semaphore.release();
         }
-        System.out.println("Thread-"+ Thread.currentThread().getName() +"-end:");
-        this.semaphore.release();
+
     }
 }
