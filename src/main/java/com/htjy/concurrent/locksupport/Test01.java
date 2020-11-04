@@ -49,7 +49,8 @@ public class Test01 {
         List<T> list;
 
         public MyContainer() {
-            this.list = Collections.synchronizedList(new ArrayList<>());
+            //this.list = Collections.synchronizedList(new ArrayList<>());
+            this.list = new ArrayList<>();
         }
 
         public void add(T obj) {
