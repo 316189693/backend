@@ -10,31 +10,33 @@ import java.util.concurrent.Semaphore;
  * Date : 2020/3/4
  * Time: 11:29
  */
-public class SemaphoreTest implements Runnable{
+public class SemaphoreTest implements Runnable {
     private Semaphore semaphore;
-    SemaphoreTest(Semaphore semaphore){
+
+    SemaphoreTest(Semaphore semaphore) {
         this.semaphore = semaphore;
     }
+
     public static void main(String[] args) {
         System.out.println("semaphore test begin: ");
-       Semaphore semaphore = new Semaphore(5);
-        for(int i = 0; i < 10; i++)
-        {
+        Semaphore semaphore = new Semaphore(5);
+        for (int i = 0; i < 10; i++) {
 
             Thread t = new Thread(new SemaphoreTest(semaphore), String.valueOf(i));
             t.start();
         }
         System.out.println("Phaser test end: ");
     }
+
     @Override
     public void run() {
 
-        System.out.println("Thread-"+ Thread.currentThread().getName() +"-start:");
+        System.out.println("Thread-" + Thread.currentThread().getName() + "-start:");
         try {
             this.semaphore.acquire();
-            System.out.println("Thread-"+ Thread.currentThread().getName() +"get signal");
+            System.out.println("Thread-" + Thread.currentThread().getName() + "get signal");
             Thread.sleep(3000);
-            System.out.println("Thread-"+ Thread.currentThread().getName() +"-end:");
+            System.out.println("Thread-" + Thread.currentThread().getName() + "-end:");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {

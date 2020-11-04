@@ -8,11 +8,13 @@ import java.util.concurrent.CyclicBarrier;
  * Date : 2020/3/4
  * Time: 10:29
  */
-public class CyclicBarrierTest implements Runnable{
+public class CyclicBarrierTest implements Runnable {
     private CyclicBarrier cyclicBarrier;
+
     CyclicBarrierTest(CyclicBarrier cyclicBarrier) {
         this.cyclicBarrier = cyclicBarrier;
     }
+
     public static void main(String[] args) {
         System.out.println("Cyclic barrier test begin: ");
         CyclicBarrier cyclicBarrier = new CyclicBarrier(5, new Runnable() {
@@ -30,13 +32,13 @@ public class CyclicBarrierTest implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("Threa-"+Thread.currentThread().getName()+"-"+"start...");
+        System.out.println("Threa-" + Thread.currentThread().getName() + "-" + "start...");
         try {
             this.cyclicBarrier.await();
-            if (!"1".equals(Thread.currentThread().getName())){
+            if (!"1".equals(Thread.currentThread().getName())) {
                 Thread.sleep(2000);
             }
-            System.out.println("Threa-"+Thread.currentThread().getName()+"-"+"end...");
+            System.out.println("Threa-" + Thread.currentThread().getName() + "-" + "end...");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (BrokenBarrierException e) {
