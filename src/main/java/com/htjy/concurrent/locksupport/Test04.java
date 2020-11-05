@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Test04 {
     final static char a = 'A';
     static char z = 'Z';
-    private static ReentrantLock reentrantLock = new ReentrantLock(true);
+    private static ReentrantLock reentrantLock = new ReentrantLock(false);
     static Thread t1 = null, t2 = null;
 
     public static void main(String[] args) {
