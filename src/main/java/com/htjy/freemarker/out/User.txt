@@ -1,0 +1,23 @@
+package com.htjy.freemarker.out;
+
+public class User {
+    private int age;
+
+    private int numn;
+
+
+    public int getAge(){
+        return this.age;
+    }
+
+     public void setAge(int age){
+         this.age = age;
+     }
+    public int getNumn(){
+        return this.numn;
+    }
+
+     public void setNumn(int numn){
+         this.numn = numn;
+     }
+}
