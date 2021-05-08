@@ -4,16 +4,18 @@ import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ForkJoinTest {
     public static void main(String[] args) {
-        long[] array = new long[2000];
+        long[] array = new long[3000];
         Random random = new Random();
         long expectedSum = 0;
         for(int i =0; i< array.length; i++){
             array[i] = random.nextLong();
             expectedSum += array[i];
         }
+
         System.out.println("Expected sum: " + expectedSum);
         ForkJoinTask<Long> forkJoinTask = new SumTask(array, 0, array.length);
         long startTime = System.currentTimeMillis();

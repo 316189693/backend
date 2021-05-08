@@ -2573,6 +2573,12 @@ public class ForkJoinPool extends AbstractExecutorService {
         long np = (long)(-parallelism); // offset ctl counts parallelism=3, np = -3
         this.ctl = ((np << AC_SHIFT) & AC_MASK) | ((np << TC_SHIFT) & TC_MASK);
         //AC_SHIFT = 48 ; 0xffffL << AC_SHIFT; TC_SHIFT = 32; TC_MASK= 0xffffL << TC_SHIFT;
+
+        //np << AC_SHIFT   1111 1111 1111 1101 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+        //AC_MASK          1111 1111 1111 1111 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+        // np << TC_SHIFT  0000 0000 0000 0000 0000 0000 0000 0011 0000 0000 0000 0000 0000 0000 0000 0000
+        // TC_MASK         0000 0000 0000 0000 1111 1111 1111 1111 0000 0000 0000 0000 0000 0000 0000 0000
+        //ctl              1111 1111 1111 1101 0000 0000 0000 0011 0000 0000 0000 0000 0000 0000 0000 0000
     }
 
     /**
