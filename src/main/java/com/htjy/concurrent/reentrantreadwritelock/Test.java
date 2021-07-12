@@ -13,6 +13,7 @@ public class Test {
 
     public static void main(String[] args) {
 
+
         for (int i = 0; i < 10; i++) {
             new Thread(new PersonWrite("write" + i)).start();
             new Thread(new PersonRead("read" + i)).start();
@@ -52,7 +53,7 @@ public class Test {
         @Override
         public void run() {
             try {
-                read.lock();
+                write.lock();
                 v++;
                 System.out.println(this.name + "write:" + v);
                 System.out.println();
@@ -60,7 +61,7 @@ public class Test {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                read.unlock();
+                write.unlock();
             }
         }
     }
