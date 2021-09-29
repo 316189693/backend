@@ -19,8 +19,7 @@ public class Test03 {
         int start = n -1;
         return IntStream.range(start, sums.length)
                 .mapToDouble(i->{
-                    double prefitln("prefix:"+prefix+", i:"+i+", n:"+n+" , start:"+start+", sums[i]:"+sums[i]);
-                    return  (sums[i]-prefix)/n;
+                    return i;
                 }).toArray();
 
     }

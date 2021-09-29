@@ -18,9 +18,8 @@ public class RabbitMqPublishTest {
         Channel channel = null;
         try{
             connectionFactory.setHost("localhost");
-            connectionFactory.setUsername("admin");
-            connectionFactory.setPassword("admin");
-            connectionFactory.setPort(8081);
+
+            connectionFactory.setPort(5672);
             connectionFactory.setVirtualHost("/");
 
             conn = connectionFactory.newConnection();
@@ -29,7 +28,7 @@ public class RabbitMqPublishTest {
             channel.queueDeclare(QUEUE_NAME,true,false,false,null);
             channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTE_KEY);
             channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTE_KEY+"1");
-            byte[] messageBodyBytes = "Hello, world!".getBytes();
+            byte[] messageBodyBytes = "Hello, fff world!".getBytes();
             channel.basicPublish(EXCHANGE_NAME, ROUTE_KEY, MessageProperties.PERSISTENT_TEXT_PLAIN, messageBodyBytes);
             channel.basicPublish(EXCHANGE_NAME, ROUTE_KEY+"1", MessageProperties.PERSISTENT_TEXT_PLAIN, messageBodyBytes);
         } catch(Exception e) {

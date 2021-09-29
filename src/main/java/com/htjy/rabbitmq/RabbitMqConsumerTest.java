@@ -17,12 +17,11 @@ public class RabbitMqConsumerTest {
 
         try {
             connectionFactory = new ConnectionFactory();
-            connectionFactory.setUsername("admin");
-            connectionFactory.setPassword("admin");
 
-            conn = connectionFactory.newConnection(new Address[]{new Address("localhost", 8081)});
+
+            conn = connectionFactory.newConnection(new Address[]{new Address("localhost", 5672)});
             channel = conn.createChannel();
-            channel.basicConsume(QUEUE_NAME, new DefaultConsumer(channel) {
+            channel.basicConsume(QUEUE_NAME, true, new DefaultConsumer(channel) {
 
                 @Override
                 public void handleDelivery(String s, Envelope envelope, AMQP.BasicProperties basicProperties, byte[] bytes) throws IOException {
@@ -32,6 +31,7 @@ public class RabbitMqConsumerTest {
                         e.printStackTrace();
                         channel.basicAck(envelope.getDeliveryTag(), false);
                     }
+
                 }
             }
             );

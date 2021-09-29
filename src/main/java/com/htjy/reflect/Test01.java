@@ -1,9 +1,11 @@
 package com.htjy.reflect;
 
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 
 /**
  * Created By willz
@@ -18,13 +20,26 @@ public class Test01 {
         showFieldInfo(fields);
        Method m = ParameterizeBran.class.getEnclosingMethod();
         System.out.println(" ");
+        showMethodInfo(ParameterizeBran.class.getMethods());
     }
 
     public static void showMethodInfo(Method[] methods) {
         for (Method m: methods) {
             Type t = m.getGenericReturnType();
-            Type[] d = m.getGenericParameterTypes();
-            System.out.println("s");
+            System.out.println("Method name:"+m.getName());
+            System.out.println("Return Raw_type:"+ m.getReturnType());
+            if (t instanceof ParameterizedType) {
+                Type[] actualTypes = ((ParameterizedType) t).getActualTypeArguments();
+                Arrays.stream(actualTypes).forEach((item)->{
+                    System.out.println("Return Raw_type parameters:"+item.getTypeName());
+                });
+            }
+
+            if (m.getGenericParameterTypes().length > 0) {
+                Arrays.stream(m.getGenericParameterTypes()).forEach((item)->{
+                    System.out.println("Return Raw_type parameters:"+item.getTypeName());
+                });
+            }
         }
     }
 

@@ -22,6 +22,10 @@ public class ParameterizeBran {
     Cat cat;
 
 
+    public Map<String, Cat> getCatMap(Map<String, Cat> catMap, Integer num) {
+        return catMap;
+    }
+
     public int countCat() {
         return 5;
     }
