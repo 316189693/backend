@@ -7,9 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.*;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
-
+    @Override
     public void configure(HttpSecurity http) throws Exception {
-       http.authorizeRequests().antMatchers("/user/**").permitAll()
-               .and().formLogin().successForwardUrl("/user/findone");
-    }
+       http.csrf().disable().authorizeRequests().antMatchers("/user/**", "/user/createUser").permitAll()
+               .and().formLogin().permitAll();
+}
 }

@@ -18,6 +18,7 @@ public class ChatServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("Server received:" + buf.toString(CharsetUtil.UTF_8));
         ByteBuf res = Unpooled.wrappedBuffer(new String("Server received, please confirm:"+ buf.toString(CharsetUtil.UTF_8)).getBytes());
         ctx.writeAndFlush(res);
+        ctx.fireChannelRead(msg);
     }
 
     @Override

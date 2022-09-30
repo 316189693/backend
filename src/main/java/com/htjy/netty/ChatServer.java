@@ -32,7 +32,7 @@ public class ChatServer{
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(new ChatServerHandler());
+                            socketChannel.pipeline().addLast(new ChatServerHandler(),new DiscardServerHandler());
                         }
                     });
             ChannelFuture channelFuture = server.bind(this.port).sync();
