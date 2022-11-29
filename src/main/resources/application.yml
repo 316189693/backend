@@ -17,7 +17,7 @@ spring:
   profiles: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/htjy
-    username: root
-    password: zng456
+    url: jdbc:mysql://localhost:33306/htjy
+    username: htjy
+    password: gGh$5ojkGDGDff
     driver-class-name: com.mysql.cj.jdbc.Driver
