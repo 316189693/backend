@@ -27,6 +27,7 @@ public class UserController {
         return user;
     }
 
+
     @RequestMapping("/updateUser")
     @ResponseBody
     public User update(HttpServletRequest request, Model model){
